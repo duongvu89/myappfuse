@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="myappfuse-web:war">
+    <output-path>$PROJECT_DIR$/web/target</output-path>
+    <root id="archive" name="myappfuse-web-3.5.0.war">
+      <element id="artifact" artifact-name="myappfuse-web:war exploded" />
+    </root>
+  </artifact>
+</component>

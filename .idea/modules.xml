@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/myappfuse.iml" filepath="$PROJECT_DIR$/myappfuse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/myappfuse-core.iml" filepath="$PROJECT_DIR$/core/myappfuse-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/myappfuse-web.iml" filepath="$PROJECT_DIR$/web/myappfuse-web.iml" />
+    </modules>
+  </component>
+</project>
