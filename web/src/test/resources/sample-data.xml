@@ -120,4 +120,37 @@
             <value description="role_id">-2</value>
         </row>
     </table>
+
+    <table name="salary_record">
+        <column>id</column>
+        <column>user_id</column>
+        <column>company</column>
+        <column>start_date</column>
+        <column>end_date</column>
+        <column>salary</column>
+        <row>
+            <value>-1</value>
+            <value>-1</value>
+            <value>Axon</value>
+            <value>2012-03-04</value>
+            <value>2015-02-28</value>
+            <value>350</value>
+        </row>
+        <row>
+            <value>-2</value>
+            <value>-2</value>
+            <value>Axon</value>
+            <value>2012-03-04</value>
+            <value>2013-02-28</value>
+            <value>350</value>
+        </row>
+        <row>
+            <value>-3</value>
+            <value>-2</value>
+            <value>Axon</value>
+            <value>2013-03-01</value>
+            <value>2015-04-30</value>
+            <value>500</value>
+        </row>
+    </table>
 </dataset>

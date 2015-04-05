@@ -12,9 +12,6 @@
     <context:component-scan base-package="personal.dgvu"/>
 
     <!-- Add new DAOs here -->
-    <bean id="personDao" class="personal.dgvu.webapp.hibernate.PersonDaoHibernate">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
 
     <!-- Add new Managers here -->
 

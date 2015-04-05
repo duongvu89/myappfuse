@@ -58,6 +58,11 @@ public class UserDaoHibernate extends GenericDaoHibernate<User, Long> implements
         return user;
     }
 
+    @Override
+    public User get(Long id) {
+        return super.get(id);
+    }
+
     /**
      * Overridden simply to call the saveUser method. This is happening
      * because saveUser flushes the session and saveObject of BaseDaoHibernate

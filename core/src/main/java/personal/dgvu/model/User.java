@@ -1,33 +1,19 @@
 package personal.dgvu.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.search.annotations.Analyze;
 import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Field;
@@ -65,6 +51,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private Address address = new Address();
     private Integer version;
     private Set<Role> roles = new HashSet<Role>();
+    private Collection<SalaryRecord> salaryRecords = new ArrayList<SalaryRecord>();
     private boolean enabled;
     private boolean accountExpired;
     private boolean accountLocked;
@@ -202,6 +189,12 @@ public class User extends BaseObject implements Serializable, UserDetails {
         getRoles().add(role);
     }
 
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.REMOVE})
+    public Collection<SalaryRecord> getSalaryRecords() {
+        return salaryRecords;
+    }
+
     /**
      * @return GrantedAuthority[] an array of roles.
      * @see org.springframework.security.core.userdetails.UserDetails#getAuthorities()
@@ -313,6 +306,11 @@ public class User extends BaseObject implements Serializable, UserDetails {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public void setSalaryRecords(Collection<SalaryRecord> salaryRecords) {
+        this.salaryRecords = salaryRecords;
+    }
+
 
     public void setVersion(Integer version) {
         this.version = version;

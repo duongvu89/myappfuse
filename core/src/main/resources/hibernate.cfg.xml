@@ -8,6 +8,6 @@
     <session-factory>
         <mapping class="personal.dgvu.model.User"/>
         <mapping class="personal.dgvu.model.Role"/>
-        <mapping class="personal.dgvu.webapp.model.Person"/>
+        <mapping class="personal.dgvu.model.SalaryRecord"/>
     </session-factory>
 </hibernate-configuration>
