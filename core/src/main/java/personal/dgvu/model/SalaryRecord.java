@@ -20,7 +20,7 @@ public class SalaryRecord extends BaseObject implements Serializable {
     private Date endDate;
     private String company;
     private int salary;
-    @Formula("salary*0.1")
+    @Transient
     private BigDecimal tax;
 
     @Id
@@ -77,12 +77,13 @@ public class SalaryRecord extends BaseObject implements Serializable {
         this.salary = salary;
     }
 
+    @Transient
     public BigDecimal getTax() {
         return tax;
     }
 
     public void setTax(BigDecimal tax) {
-        this.tax = tax;
+        this.tax = new BigDecimal(salary * 0.01);//this is the formula!?
     }
 
     @Override
