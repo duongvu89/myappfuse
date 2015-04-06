@@ -16,5 +16,8 @@
     <li>
         <a href="<c:url value='/fileupload'/>"><fmt:message key="menu.selectFile"/></a>
     </li>
+    <li>
+        <a href="<c:url value='/taxpaid'/>"><fmt:message key="menu.taxpaid"/></a>
+    </li>
 </ul>
 </body>

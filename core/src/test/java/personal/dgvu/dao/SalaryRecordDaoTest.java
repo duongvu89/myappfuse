@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Duong Vu on 05-Apr-15.
  */
-public class SalaryRecordTest extends BaseDaoTestCase {
+public class SalaryRecordDaoTest extends BaseDaoTestCase {
     @Autowired
     private SalaryRecordDao srDao;
 

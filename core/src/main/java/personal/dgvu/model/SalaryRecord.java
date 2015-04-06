@@ -1,10 +1,10 @@
 package personal.dgvu.model;
 
-import org.hibernate.annotations.GeneratorType;
-import org.springframework.beans.factory.parsing.Location;
+import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
@@ -20,6 +20,8 @@ public class SalaryRecord extends BaseObject implements Serializable {
     private Date endDate;
     private String company;
     private int salary;
+    @Formula("salary*0.1")
+    private BigDecimal tax;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,12 +68,21 @@ public class SalaryRecord extends BaseObject implements Serializable {
         this.company = company;
     }
 
+    @Column(name="salary")
     public int getSalary() {
         return salary;
     }
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public BigDecimal getTax() {
+        return tax;
+    }
+
+    public void setTax(BigDecimal tax) {
+        this.tax = tax;
     }
 
     @Override
@@ -100,10 +111,13 @@ public class SalaryRecord extends BaseObject implements Serializable {
     @Override
     public String toString() {
         return "SalaryRecord{" +
-                "startDate=" + startDate +
+                "id=" + id +
+                ", user=" + user +
+                ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", company='" + company + '\'' +
                 ", salary=" + salary +
+                ", tax=" + tax +
                 '}';
     }
 }

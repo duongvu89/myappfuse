@@ -189,7 +189,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         getRoles().add(role);
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.EAGER)
     @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.REMOVE})
     public Collection<SalaryRecord> getSalaryRecords() {
         return salaryRecords;
