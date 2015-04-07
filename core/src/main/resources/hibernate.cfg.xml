@@ -6,6 +6,8 @@
 
 <hibernate-configuration>
     <session-factory>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
         <mapping class="personal.dgvu.model.User"/>
         <mapping class="personal.dgvu.model.Role"/>
         <mapping class="personal.dgvu.model.SalaryRecord"/>
