@@ -67,7 +67,6 @@ public class SalaryRecord extends BaseObject implements Serializable {
         this.company = company;
     }
 
-    @Column(name="salary")
     public int getSalary() {
         return salary;
     }
@@ -76,14 +75,13 @@ public class SalaryRecord extends BaseObject implements Serializable {
         this.salary = salary;
     }
 
-    //don't have @Formula table has tax column
-    @Formula("salary * 10")
+    @Formula("salary * 0.1")
     public BigDecimal getTax() {
         return tax;
     }
 
     public void setTax(BigDecimal tax) {
-        this.tax = new BigDecimal(salary * 0.01);//this is the formula!?
+        this.tax = tax;
     }
 
     @Override

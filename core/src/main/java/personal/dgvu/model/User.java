@@ -311,7 +311,6 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.salaryRecords = salaryRecords;
     }
 
-
     public void setVersion(Integer version) {
         this.version = version;
     }
