@@ -1,6 +1,7 @@
 package personal.dgvu.service.impl;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Hibernate;
 import personal.dgvu.dao.UserDao;
 import personal.dgvu.model.User;
 import personal.dgvu.service.MailEngine;
@@ -179,7 +180,9 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
      */
     @Override
     public User getUserByUsername(final String username) throws UsernameNotFoundException {
-        return (User) userDao.loadUserByUsername(username);
+        User u = (User) userDao.loadUserByUsername(username);
+        Hibernate.initialize(u.getSalaryRecords());
+        return u;
     }
 
     /**
