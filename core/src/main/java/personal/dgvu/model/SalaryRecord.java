@@ -77,7 +77,7 @@ public class SalaryRecord extends BaseObject implements Serializable {
         this.salary = salary;
     }
 
-    @Transient
+    @Formula("salary * 10")
     public BigDecimal getTax() {
         return tax;
     }
