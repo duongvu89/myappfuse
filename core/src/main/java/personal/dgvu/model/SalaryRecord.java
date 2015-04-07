@@ -91,19 +91,21 @@ public class SalaryRecord extends BaseObject implements Serializable {
 
         SalaryRecord that = (SalaryRecord) o;
 
-        if (!id.equals(that.id)) return false;
+        if (salary != that.salary) return false;
         if (!user.equals(that.user)) return false;
         if (!startDate.equals(that.startDate)) return false;
-        return !(endDate != null ? !endDate.equals(that.endDate) : that.endDate != null);
+        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
+        return !(company != null ? !company.equals(that.company) : that.company != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + user.hashCode();
+        int result = user.hashCode();
         result = 31 * result + startDate.hashCode();
         result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
+        result = 31 * result + (company != null ? company.hashCode() : 0);
+        result = 31 * result + salary;
         return result;
     }
 
