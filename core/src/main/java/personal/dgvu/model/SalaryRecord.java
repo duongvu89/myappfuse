@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "salary_record")
-public class SalaryRecord extends BaseObject implements Serializable, Comparable<SalaryRecord> {
+public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord> {
 
     private Long id;
     private User user;
