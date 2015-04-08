@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.*;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -51,7 +53,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
     private Address address = new Address();
     private Integer version;
     private Set<Role> roles = new HashSet<Role>();
-    private Collection<SalaryRecord> salaryRecords = new ArrayList<SalaryRecord>();
+    private List<SalaryRecord> salaryRecords = new ArrayList<SalaryRecord>();
     private boolean enabled;
     private boolean accountExpired;
     private boolean accountLocked;
@@ -190,8 +192,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
     }
 
     @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
-    @Cascade({CascadeType.SAVE_UPDATE, CascadeType.DELETE, CascadeType.REMOVE})
-    public Collection<SalaryRecord> getSalaryRecords() {
+    @Cascade({CascadeType.SAVE_UPDATE})
+    public List<SalaryRecord> getSalaryRecords() {
         return salaryRecords;
     }
 
@@ -307,7 +309,7 @@ public class User extends BaseObject implements Serializable, UserDetails {
         this.roles = roles;
     }
 
-    public void setSalaryRecords(Collection<SalaryRecord> salaryRecords) {
+    public void setSalaryRecords(List<SalaryRecord> salaryRecords) {
         this.salaryRecords = salaryRecords;
     }
 

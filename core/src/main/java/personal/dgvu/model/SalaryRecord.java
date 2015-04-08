@@ -12,7 +12,7 @@ import java.sql.Date;
  */
 @Entity
 @Table(name = "salary_record")
-public class SalaryRecord extends BaseObject implements Serializable {
+public class SalaryRecord extends BaseObject implements Serializable, Comparable<SalaryRecord> {
 
     private Long id;
     private User user;
@@ -33,6 +33,7 @@ public class SalaryRecord extends BaseObject implements Serializable {
     }
 
     @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     public User getUser() {
         return user;
     }
@@ -120,5 +121,10 @@ public class SalaryRecord extends BaseObject implements Serializable {
                 ", salary=" + salary +
                 ", tax=" + tax +
                 '}';
+    }
+
+    @Override
+    public int compareTo(SalaryRecord o) {
+        return this.startDate.compareTo(o.startDate);
     }
 }
