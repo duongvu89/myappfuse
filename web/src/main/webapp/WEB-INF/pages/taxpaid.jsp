@@ -28,6 +28,6 @@
   <display:column property="salary" sortable="true" titleKey="Salary"/>
   <display:column property="tax" sortable="true" titleKey="Tax"/>
 
-  <display:setProperty name="paging.banner.item_name">record/<display:setProperty>
+  <display:setProperty name="paging.banner.item_name">record</display:setProperty>
   <display:setProperty name="paging.banner.items_name">records</display:setProperty>
 </display:table>
