@@ -19,8 +19,10 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
     private Date startDate;
     private Date endDate;
     private String company;
+    private Country country;
     private int salary;
     private BigDecimal tax;
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,6 +68,16 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
 
     public void setCompany(String company) {
         this.company = company;
+    }
+
+    @OneToOne(optional=false)
+    @JoinColumn(name="country_code", unique=true, nullable=false, updatable=false)
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public int getSalary() {

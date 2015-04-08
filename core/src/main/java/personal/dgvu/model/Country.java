@@ -1,7 +1,6 @@
 package personal.dgvu.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by ndvu on 4/8/2015.
@@ -13,7 +12,10 @@ public class Country extends BaseObject {
     private String code;
     private String name;
     private String currency;
+    private SalaryRecord salaryRecord;
 
+    @Id
+    @Column(name = "code", nullable = false, length = 2, updatable = false)
     public String getCode() {
         return code;
     }
@@ -22,6 +24,7 @@ public class Country extends BaseObject {
         this.code = code;
     }
 
+    @Column(nullable = false, unique = true)
     public String getName() {
         return name;
     }
@@ -30,6 +33,7 @@ public class Country extends BaseObject {
         this.name = name;
     }
 
+    @Column(nullable = false, length = 3)
     public String getCurrency() {
         return currency;
     }
@@ -38,10 +42,19 @@ public class Country extends BaseObject {
         this.currency = currency;
     }
 
+    @OneToOne(optional = false, mappedBy = "country")
+    public SalaryRecord getSalaryRecord() {
+        return salaryRecord;
+    }
+
+    public void setSalaryRecord(SalaryRecord salaryRecord) {
+        this.salaryRecord = salaryRecord;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || this.getClass() != o.getClass()) return false;
 
         Country country = (Country) o;
 
