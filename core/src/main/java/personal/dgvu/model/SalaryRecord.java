@@ -3,7 +3,6 @@ package personal.dgvu.model;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Date;
 
@@ -71,7 +70,7 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
     }
 
     @OneToOne(optional=false)
-    @JoinColumn(name="country_code", unique=true, nullable=false, updatable=false)
+    @JoinColumn(name = "country",unique=true, nullable=false, updatable=false)
     public Country getCountry() {
         return country;
     }
