@@ -1,5 +1,6 @@
 package personal.dgvu.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -14,6 +15,7 @@ public class Country extends BaseObject {
     private String name;
     private String currency;
 
+    @Column(name = "code")
     public String getCode() {
         return code;
     }
