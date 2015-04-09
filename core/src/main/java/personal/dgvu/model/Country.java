@@ -64,4 +64,5 @@ public class Country extends BaseObject {
                 ", currency='" + currency + '\'' +
                 '}';
     }
+    //try to merge this
 }
