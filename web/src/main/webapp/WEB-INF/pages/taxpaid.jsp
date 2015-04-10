@@ -21,12 +21,13 @@
 </div>
 
 <display:table name="salaryRecordList" class="table table-condensed table-striped table-hover" requestURI=""
-               id="salaryRecordList" export="true" pagesize="25" defaultsort="1" defaultorder="ascending">
+               id="salaryRecord" export="true" pagesize="25" defaultsort="1" defaultorder="ascending">
   <display:column property="startDate" sortable="true" titleKey="Start Date"/>
   <display:column property="endDate" sortable="true" titleKey="End Date"/>
   <display:column property="company" sortable="true" titleKey="Company"/>
-  <display:column property="salary" sortable="true" titleKey="Salary"/>
-  <display:column property="tax" sortable="true" titleKey="Tax"/>
+  <display:column property="country.name" sortable="true" titleKey="Location"/>
+  <display:column property="salary" sortable="true" titleKey="Salary (${salaryRecord.country.currency})"/>
+  <display:column property="tax" sortable="true" titleKey="Tax (${salaryRecord.country.currency})"/>
 
   <display:setProperty name="paging.banner.item_name">record</display:setProperty>
   <display:setProperty name="paging.banner.items_name">records</display:setProperty>
