@@ -26,8 +26,9 @@
   <display:column property="endDate" sortable="true" titleKey="End Date"/>
   <display:column property="company" sortable="true" titleKey="Company"/>
   <display:column property="country.name" sortable="true" titleKey="Location"/>
-  <display:column property="salary" sortable="true" titleKey="Salary (${salaryRecord.country.currency})"/>
-  <display:column property="tax" sortable="true" titleKey="Tax (${salaryRecord.country.currency})"/>
+  <display:column property="salary" sortable="true" titleKey="Salary"/>
+  <display:column property="tax" sortable="true" titleKey="Tax"/>
+  <display:column property="country.currency" sortable="true" titleKey="Currency"/>
 
   <display:setProperty name="paging.banner.item_name">record</display:setProperty>
   <display:setProperty name="paging.banner.items_name">records</display:setProperty>
