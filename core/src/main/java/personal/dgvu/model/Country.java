@@ -13,11 +13,9 @@ public class Country extends BaseObject {
     private String code;
     private String name;
     private String currency;
-    private SalaryRecord salaryRecord;
-
 
     @Id
-    @Column(name = "code", nullable = false, length = 2, updatable = false)
+    @Column(nullable = false, length = 2, updatable = false)
     public String getCode() {
         return code;
     }
@@ -44,15 +42,6 @@ public class Country extends BaseObject {
         this.currency = currency;
     }
 
-    @OneToOne(optional = false, mappedBy = "country")
-    public SalaryRecord getSalaryRecord() {
-        return salaryRecord;
-    }
-
-    public void setSalaryRecord(SalaryRecord salaryRecord) {
-        this.salaryRecord = salaryRecord;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -77,5 +66,4 @@ public class Country extends BaseObject {
                 ", currency='" + currency + '\'' +
                 '}';
     }
-    //try to merge this
 }

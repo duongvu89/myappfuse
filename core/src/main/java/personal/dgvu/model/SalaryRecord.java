@@ -14,7 +14,6 @@ import java.sql.Date;
 public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord> {
 
     private Long id;
-    private User user;
     private Date startDate;
     private Date endDate;
     private String company;
@@ -31,16 +30,6 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     @Column(name = "start_date", nullable = false)
@@ -69,8 +58,8 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
         this.company = company;
     }
 
-    @OneToOne(optional=false)
-    @JoinColumn(name = "country",unique=true, nullable=false, updatable=false)
+    @ManyToOne(optional=false)
+    @JoinColumn(name = "country",unique=false, nullable=false, updatable=false)
     public Country getCountry() {
         return country;
     }
@@ -103,21 +92,23 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
 
         SalaryRecord that = (SalaryRecord) o;
 
-        if (salary != that.salary) return false;
-        if (!user.equals(that.user)) return false;
-        if (!startDate.equals(that.startDate)) return false;
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
-        return !(company != null ? !company.equals(that.company) : that.company != null);
+        if (getSalary() != that.getSalary()) return false;
+        if (!getStartDate().equals(that.getStartDate())) return false;
+        if (getEndDate() != null ? !getEndDate().equals(that.getEndDate()) : that.getEndDate() != null) return false;
+        if (getCompany() != null ? !getCompany().equals(that.getCompany()) : that.getCompany() != null) return false;
+        if (!getCountry().equals(that.getCountry())) return false;
+        return !(getTax() != null ? !getTax().equals(that.getTax()) : that.getTax() != null);
 
     }
 
     @Override
     public int hashCode() {
-        int result = user.hashCode();
-        result = 31 * result + startDate.hashCode();
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
-        result = 31 * result + (company != null ? company.hashCode() : 0);
-        result = 31 * result + salary;
+        int result = getStartDate().hashCode();
+        result = 31 * result + (getEndDate() != null ? getEndDate().hashCode() : 0);
+        result = 31 * result + (getCompany() != null ? getCompany().hashCode() : 0);
+        result = 31 * result + getCountry().hashCode();
+        result = 31 * result + getSalary();
+        result = 31 * result + (getTax() != null ? getTax().hashCode() : 0);
         return result;
     }
 
@@ -125,10 +116,10 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
     public String toString() {
         return "SalaryRecord{" +
                 "id=" + id +
-                ", user=" + user +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", company='" + company + '\'' +
+                ", country=" + country +
                 ", salary=" + salary +
                 ", tax=" + tax +
                 '}';

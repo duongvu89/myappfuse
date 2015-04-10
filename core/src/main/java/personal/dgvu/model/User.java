@@ -191,8 +191,8 @@ public class User extends BaseObject implements Serializable, UserDetails {
         getRoles().add(role);
     }
 
-    @OneToMany(mappedBy = "user", orphanRemoval = true, fetch = FetchType.LAZY)
-    @Cascade({CascadeType.SAVE_UPDATE})
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name = "user_id")
     public List<SalaryRecord> getSalaryRecords() {
         return salaryRecords;
     }
