@@ -10,6 +10,7 @@
         <property name="format_sql">true</property>
         <mapping class="personal.dgvu.model.User"/>
         <mapping class="personal.dgvu.model.Role"/>
+        <mapping class="personal.dgvu.model.Country"/>
         <mapping class="personal.dgvu.model.SalaryRecord"/>
     </session-factory>
 </hibernate-configuration>

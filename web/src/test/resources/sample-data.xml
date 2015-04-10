@@ -121,6 +121,22 @@
         </row>
     </table>
 
+    <table name="country">
+        <column>code</column>
+        <column>name</column>
+        <column>currency</column>
+        <row>
+            <value>VN</value>
+            <value>Vietnam</value>
+            <value>VND</value>
+        </row>
+        <row>
+            <value>MS</value>
+            <value>Malaysia</value>
+            <value>MYR</value>
+        </row>
+    </table>
+
     <table name="salary_record">
         <column>id</column>
         <column>user_id</column>
@@ -128,6 +144,7 @@
         <column>start_date</column>
         <column>end_date</column>
         <column>salary</column>
+        <column>country</column>
         <row>
             <value>-1</value>
             <value>-1</value>
@@ -135,6 +152,7 @@
             <value>2012-03-04</value>
             <value>2015-02-28</value>
             <value>350</value>
+            <value>VN</value>
         </row>
         <row>
             <value>-2</value>
@@ -143,6 +161,7 @@
             <value>2012-03-04</value>
             <value>2013-02-28</value>
             <value>350</value>
+            <value>VN</value>
         </row>
         <row>
             <value>-3</value>
@@ -151,6 +170,9 @@
             <value>2013-03-01</value>
             <value>2015-04-30</value>
             <value>500</value>
+            <value>MS</value>
         </row>
     </table>
+
+
 </dataset>
