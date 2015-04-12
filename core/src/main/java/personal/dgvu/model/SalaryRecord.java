@@ -59,7 +59,7 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
     }
 
     @ManyToOne(optional=false)
-    @JoinColumn(name = "country",unique=false, nullable=false, updatable=false)
+    @JoinColumn(name = "country_code", unique=false, nullable=false, updatable=false)
     public Country getCountry() {
         return country;
     }

@@ -144,7 +144,7 @@
         <column>start_date</column>
         <column>end_date</column>
         <column>salary</column>
-        <column>country</column>
+        <column>country_code</column>
         <row>
             <value>-1</value>
             <value>-1</value>
