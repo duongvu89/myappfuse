@@ -11,6 +11,7 @@
         <mapping class="personal.dgvu.model.User"/>
         <mapping class="personal.dgvu.model.Role"/>
         <mapping class="personal.dgvu.model.Country"/>
+        <mapping class="personal.dgvu.model.TaxRate"/>
         <mapping class="personal.dgvu.model.SalaryRecord"/>
     </session-factory>
 </hibernate-configuration>

@@ -174,5 +174,54 @@
         </row>
     </table>
 
+    <table name="tax_rate">
+        <column>id</column>
+        <column>country_code</column>
+        <column>salary_from</column>
+        <column>salary_to</column>
+        <column>rate</column>
+        <row>
+            <value>-1</value>
+            <value>VN</value>
+            <value>0</value>
+            <value>100</value>
+            <value>5</value>
+        </row>
+        <row>
+            <value>-2</value>
+            <value>VN</value>
+            <value>100</value>
+            <value>200</value>
+            <value>10</value>
+        </row>
+        <row>
+            <value>-3</value>
+            <value>VN</value>
+            <value>200</value>
+            <value>350</value>
+            <value>15</value>
+        </row>
 
+        <row>
+            <value>-4</value>
+            <value>MS</value>
+            <value>0</value>
+            <value>100</value>
+            <value>0</value>
+        </row>
+        <row>
+            <value>-5</value>
+            <value>MS</value>
+            <value>100</value>
+            <value>200</value>
+            <value>5</value>
+        </row>
+        <row>
+            <value>-6</value>
+            <value>MS</value>
+            <value>200</value>
+            <value>350</value>
+            <value>10</value>
+        </row>
+    </table>
 </dataset>
