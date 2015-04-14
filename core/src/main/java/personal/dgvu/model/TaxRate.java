@@ -12,6 +12,7 @@ public class TaxRate extends BaseObject {
 
     private Long id;
     private Country country;
+    private Short year;
     private BigDecimal from;
     private BigDecimal to;
     private BigDecimal rate;
@@ -34,7 +35,16 @@ public class TaxRate extends BaseObject {
         this.country = country;
     }
 
-    @Column(name = "salary_from")
+    @Column(nullable = false)
+    public Short getYear() {
+        return year;
+    }
+
+    public void setYear(Short year) {
+        this.year = year;
+    }
+
+    @Column(name = "salary_from", nullable = false)
     public BigDecimal getFrom() {
         return from;
     }
@@ -43,7 +53,7 @@ public class TaxRate extends BaseObject {
         this.from = from;
     }
 
-    @Column(name = "salary_to")
+    @Column(name = "salary_to", nullable = false)
     public BigDecimal getTo() {
         return to;
     }
@@ -52,6 +62,7 @@ public class TaxRate extends BaseObject {
         this.to = to;
     }
 
+    @Column(nullable = false)
     public BigDecimal getRate() {
         return rate;
     }

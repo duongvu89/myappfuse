@@ -177,12 +177,14 @@
     <table name="tax_rate">
         <column>id</column>
         <column>country_code</column>
+        <column>year</column>
         <column>salary_from</column>
         <column>salary_to</column>
         <column>rate</column>
         <row>
             <value>-1</value>
             <value>VN</value>
+            <value>2014</value>
             <value>0</value>
             <value>100</value>
             <value>5</value>
@@ -190,6 +192,7 @@
         <row>
             <value>-2</value>
             <value>VN</value>
+            <value>2014</value>
             <value>100</value>
             <value>200</value>
             <value>10</value>
@@ -197,6 +200,7 @@
         <row>
             <value>-3</value>
             <value>VN</value>
+            <value>2014</value>
             <value>200</value>
             <value>350</value>
             <value>15</value>
@@ -205,6 +209,7 @@
         <row>
             <value>-4</value>
             <value>MS</value>
+            <value>2014</value>
             <value>0</value>
             <value>100</value>
             <value>0</value>
@@ -212,6 +217,7 @@
         <row>
             <value>-5</value>
             <value>MS</value>
+            <value>2014</value>
             <value>100</value>
             <value>200</value>
             <value>5</value>
@@ -219,6 +225,57 @@
         <row>
             <value>-6</value>
             <value>MS</value>
+            <value>2014</value>
+            <value>200</value>
+            <value>350</value>
+            <value>10</value>
+        </row>
+
+        <row>
+            <value>-7</value>
+            <value>VN</value>
+            <value>2015</value>
+            <value>0</value>
+            <value>100</value>
+            <value>5</value>
+        </row>
+        <row>
+            <value>-8</value>
+            <value>VN</value>
+            <value>2015</value>
+            <value>100</value>
+            <value>200</value>
+            <value>10</value>
+        </row>
+        <row>
+            <value>-9</value>
+            <value>VN</value>
+            <value>2015</value>
+            <value>200</value>
+            <value>350</value>
+            <value>15</value>
+        </row>
+
+        <row>
+            <value>-10</value>
+            <value>MS</value>
+            <value>2015</value>
+            <value>0</value>
+            <value>100</value>
+            <value>0</value>
+        </row>
+        <row>
+            <value>-11</value>
+            <value>MS</value>
+            <value>2015</value>
+            <value>100</value>
+            <value>200</value>
+            <value>5</value>
+        </row>
+        <row>
+            <value>-12</value>
+            <value>MS</value>
+            <value>2015</value>
             <value>200</value>
             <value>350</value>
             <value>10</value>
