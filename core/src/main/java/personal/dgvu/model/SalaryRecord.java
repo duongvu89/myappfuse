@@ -76,7 +76,7 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
         this.salary = salary;
     }
 
-    @Formula("salary * 0.1")
+    @Transient
     public BigDecimal getTax() {
         return tax;
     }
