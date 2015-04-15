@@ -1,13 +1,12 @@
 package personal.dgvu.dao.hibernate;
 
-import org.hibernate.SessionFactory;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import personal.dgvu.dao.SalaryRecordDao;
 import personal.dgvu.model.SalaryRecord;
 import personal.dgvu.model.TaxRate;
-import personal.dgvu.model.User;
-
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,9 +23,18 @@ public class SalaryRecordDaoHibernate extends GenericDaoHibernate<SalaryRecord, 
     @Override
     public List<SalaryRecord> getAll() {
         List<SalaryRecord> records = super.getAll();
+
+        Query query = getSession().createQuery("from TaxRate");
+//
+//        List<TaxRate> taxRates = query.list();
+
         for (int i = 0; i < records.size(); i++) {
-            List<TaxRate> taxRates = getSession().createCriteria(TaxRate.class).add(Restrictions.eq("country_code", records.get(i).getCountry().getCode())).list();
+
+            Criteria cr = getSession().createCriteria(TaxRate.class);
+            cr.add(Restrictions.eq("country", records.get(i).getCountry().getCode()));
+            List<TaxRate> results = cr.list();
             records.get(i).setTax(new BigDecimal(10));
+            System.out.println("*******" + results);
             System.out.println("~~~~" + records.toString());
         }
         return records;

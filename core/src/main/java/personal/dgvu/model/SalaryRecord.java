@@ -19,6 +19,7 @@ public class SalaryRecord extends BaseObject implements Comparable<SalaryRecord>
     private String company;
     private Country country;
     private int salary;
+
     private BigDecimal tax;
 
 
