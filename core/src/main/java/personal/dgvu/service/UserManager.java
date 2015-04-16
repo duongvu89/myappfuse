@@ -1,5 +1,7 @@
 package personal.dgvu.service;
 
+import personal.dgvu.dao.SalaryRecordDao;
+import personal.dgvu.dao.TaxRateDao;
 import personal.dgvu.dao.UserDao;
 import personal.dgvu.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,6 +23,8 @@ public interface UserManager extends GenericManager<User, Long> {
      * @param userDao the UserDao implementation to use
      */
     void setUserDao(UserDao userDao);
+
+    void setTaxRateDao(TaxRateDao taxRateDao);
 
     /**
      * Convenience method for testing - allows you to mock the PasswordEncoder and set it on an interface.

@@ -1,8 +1,14 @@
 package personal.dgvu.service.impl;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Hibernate;
+import personal.dgvu.dao.SalaryRecordDao;
+import personal.dgvu.dao.TaxRateDao;
 import personal.dgvu.dao.UserDao;
+import personal.dgvu.model.SalaryRecord;
+import personal.dgvu.model.TaxRate;
 import personal.dgvu.model.User;
 import personal.dgvu.service.MailEngine;
 import personal.dgvu.service.UserExistsException;
@@ -17,6 +23,8 @@ import org.springframework.stereotype.Service;
 
 import javax.jws.WebService;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +40,7 @@ import java.util.Map;
 public class UserManagerImpl extends GenericManagerImpl<User, Long> implements UserManager, UserService {
     private PasswordEncoder passwordEncoder;
     private UserDao userDao;
+    private TaxRateDao taxRateDao;
 
     private MailEngine mailEngine;
     private SimpleMailMessage message;
@@ -51,6 +60,12 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     public void setUserDao(final UserDao userDao) {
         this.dao = userDao;
         this.userDao = userDao;
+    }
+
+    @Override
+    @Autowired
+    public void setTaxRateDao(TaxRateDao taxRateDao) {
+        this.taxRateDao = taxRateDao;
     }
 
     @Autowired(required = false)
@@ -182,7 +197,36 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     public User getUserByUsername(final String username) throws UsernameNotFoundException {
         User u = (User) userDao.loadUserByUsername(username);
         Hibernate.initialize(u.getSalaryRecords());
+        calculateTaxRate(u.getSalaryRecords());
         return u;
+    }
+
+    private void calculateTaxRate(List<SalaryRecord> records) {
+        List<TaxRate> allTaxRates = taxRateDao.getAll();
+
+        for (int i = 0; i < records.size(); i++) {
+            final SalaryRecord record = records.get(i);
+            List<TaxRate> taxRates = (List<TaxRate>) CollectionUtils.select(allTaxRates, new Predicate() {
+                @Override
+                public boolean evaluate(Object o) {
+                    TaxRate taxRate = (TaxRate) o;
+                    return taxRate.getCountry().getCode() == record.getCountry().getCode();
+                }
+            });
+
+            BigDecimal tax = new BigDecimal(0);
+            BigDecimal salary = new BigDecimal(record.getSalary());
+            for(TaxRate taxRate : taxRates) {
+                if (salary.compareTo(taxRate.getTo()) >= 0) {
+                    tax =  tax.add(taxRate.getTo().subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
+                } else if (salary.compareTo(taxRate.getTo()) < 0 & salary.compareTo(taxRate.getFrom()) >= 0) {
+                    tax =  tax.add(salary.subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
+                }
+            }
+            records.get(i).setTax(tax);
+            System.out.println("*******" + tax);
+            System.out.println("~~~~" + records.toString());
+        }
     }
 
     /**
