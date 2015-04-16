@@ -4,7 +4,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.Predicate;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Hibernate;
-import personal.dgvu.dao.SalaryRecordDao;
+import org.joda.time.LocalDate;
+import org.joda.time.Months;
 import personal.dgvu.dao.TaxRateDao;
 import personal.dgvu.dao.UserDao;
 import personal.dgvu.model.SalaryRecord;
@@ -24,7 +25,6 @@ import org.springframework.stereotype.Service;
 import javax.jws.WebService;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.MathContext;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -202,8 +202,8 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     }
 
     private void calculateTaxRate(List<SalaryRecord> records) {
-        List<TaxRate> allTaxRates = taxRateDao.getAll();
 
+        List<TaxRate> allTaxRates = taxRateDao.getAll();
         for (int i = 0; i < records.size(); i++) {
             final SalaryRecord record = records.get(i);
             List<TaxRate> taxRates = (List<TaxRate>) CollectionUtils.select(allTaxRates, new Predicate() {
@@ -214,18 +214,24 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
                 }
             });
 
+            LocalDate startDate = new LocalDate(record.getStartDate());
+            LocalDate endDate = new LocalDate(record.getEndDate());
+
             BigDecimal tax = new BigDecimal(0);
-            BigDecimal salary = new BigDecimal(record.getSalary());
+            int month = Months.monthsBetween(startDate, endDate).getMonths();
+            BigDecimal salary = new BigDecimal(record.getSalary() * month);
+            System.out.println("Months:" + month + " Salary:" + salary);
             for(TaxRate taxRate : taxRates) {
                 if (salary.compareTo(taxRate.getTo()) >= 0) {
                     tax =  tax.add(taxRate.getTo().subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
+                    salary = salary.subtract(taxRate.getTo().subtract(taxRate.getFrom()));
                 } else if (salary.compareTo(taxRate.getTo()) < 0 & salary.compareTo(taxRate.getFrom()) >= 0) {
                     tax =  tax.add(salary.subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
+                    salary = taxRate.getFrom();
                 }
+                System.out.println("Tax rate from:" + taxRate.getFrom() + " Tax rate to:" + taxRate.getTo() + " Tax:" + tax);
             }
-            records.get(i).setTax(tax);
-            System.out.println("*******" + tax);
-            System.out.println("~~~~" + records.toString());
+            records.get(i).setTax(tax.setScale(1, BigDecimal.ROUND_HALF_UP));
         }
     }
 

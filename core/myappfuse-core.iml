@@ -115,6 +115,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.subethamail:subethasmtp-wiser:1.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.subethamail:subethasmtp-smtp:1.2" level="project" />
     <orderEntry type="library" name="Maven: commons-logging:commons-logging:1.2" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.7" level="project" />
     <orderEntry type="library" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.security:spring-security-core:3.2.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
