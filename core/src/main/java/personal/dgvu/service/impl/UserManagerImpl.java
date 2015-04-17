@@ -197,49 +197,58 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
     @Override
     public User getUserByUsername(final String username) throws UsernameNotFoundException {
         User u = (User) userDao.loadUserByUsername(username);
-        Hibernate.initialize(u.getSalaryRecords());
-        calculateTaxRate(u.getSalaryRecords());
+        calculateTax(u);
         return u;
     }
 
-    private void calculateTaxRate(List<SalaryRecord> records) {
-
+    /**
+     * {@inheritDoc}
+     * @param user
+     */
+    @Override
+    public void calculateTax(User user) {
+        Hibernate.initialize(user.getSalaryRecords());
+        List<SalaryRecord> records = user.getSalaryRecords();
         List<TaxRate> allTaxRates = taxRateDao.getAll();
         for (int i = 0; i < records.size(); i++) {
-            final SalaryRecord record = records.get(i);
-            final LocalDate startDate = new LocalDate(record.getStartDate());
-            final LocalDate endDate = new LocalDate(record.getEndDate());
-
-            List<TaxRate> taxRates = (List<TaxRate>) CollectionUtils.select(allTaxRates, new Predicate() {
-                @Override
-                public boolean evaluate(Object o) {
-                    TaxRate taxRate = (TaxRate) o;
-                    return (taxRate.getCountry().getCode() == record.getCountry().getCode()) && (taxRate.getYear() == endDate.getYear());
-                }
-            });
-
-            BigDecimal tax = new BigDecimal(0);
-            BigDecimal tmpTax;
-            int month = Months.monthsBetween(startDate, endDate).getMonths();
-            month = month > 12 ? 12 : month;
-            BigDecimal income = new BigDecimal(record.getSalary() * month);
-            System.out.println("Months:" + month + " Salary:" + income);
-            for(TaxRate taxRate : taxRates) {
-                tmpTax = tax;
-                if (income.compareTo(taxRate.getTo()) >= 0) {
-                    tax =  tax.add(taxRate.getTo().subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
-                    income = income.subtract(taxRate.getTo().subtract(taxRate.getFrom()));
-                    System.out.println("Tax from " + taxRate.getFrom() + " Tax to " + taxRate.getTo() + " is " + tax.subtract(tmpTax));
-                } else if (income.compareTo(taxRate.getTo()) < 0 & income.compareTo(taxRate.getFrom()) >= 0) {
-                    String incomeStr = income.toPlainString();
-                    tax =  tax.add(income.subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
-                    income = taxRate.getFrom();
-                    System.out.println("Tax from " + taxRate.getFrom() + " Tax to " + incomeStr + " is " + tax.subtract(tmpTax));
-                }
-
-            }
-            records.get(i).setTax(tax.divide(new BigDecimal(month), 1, RoundingMode.HALF_UP));
+            calculateTax(allTaxRates, records.get(i));
         }
+    }
+
+    private void calculateTax(List<TaxRate> allTaxRates, SalaryRecord originRecord) {
+        final SalaryRecord record = originRecord;
+        final LocalDate startDate = new LocalDate(record.getStartDate());
+        final LocalDate endDate = new LocalDate(record.getEndDate());
+
+        List<TaxRate> taxRates = (List<TaxRate>) CollectionUtils.select(allTaxRates, new Predicate() {
+            @Override
+            public boolean evaluate(Object o) {
+                TaxRate taxRate = (TaxRate) o;
+                return (taxRate.getCountry().getCode() == record.getCountry().getCode()) && (taxRate.getYear() == endDate.getYear());
+            }
+        });
+
+        BigDecimal tax = new BigDecimal(0);
+        BigDecimal tmpTax;
+        int month = Months.monthsBetween(startDate, endDate).getMonths();
+        month = month > 12 ? 12 : month;
+        BigDecimal income = new BigDecimal(record.getSalary() * month);
+        System.out.println("Months:" + month + " Salary:" + income);
+        for(TaxRate taxRate : taxRates) {
+            tmpTax = tax;
+            if (income.compareTo(taxRate.getTo()) >= 0) {
+                tax =  tax.add(taxRate.getTo().subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
+                income = income.subtract(taxRate.getTo().subtract(taxRate.getFrom()));
+                System.out.println("Tax from " + taxRate.getFrom() + " Tax to " + taxRate.getTo() + " is " + tax.subtract(tmpTax));
+            } else if (income.compareTo(taxRate.getTo()) < 0 & income.compareTo(taxRate.getFrom()) >= 0) {
+                String incomeStr = income.toPlainString();
+                tax =  tax.add(income.subtract(taxRate.getFrom()).multiply(taxRate.getRate().divide(new BigDecimal(100))));
+                income = taxRate.getFrom();
+                System.out.println("Tax from " + taxRate.getFrom() + " Tax to " + incomeStr + " is " + tax.subtract(tmpTax));
+            }
+
+        }
+        originRecord.setTax(tax.divide(new BigDecimal(month), 1, RoundingMode.HALF_UP));
     }
 
     /**

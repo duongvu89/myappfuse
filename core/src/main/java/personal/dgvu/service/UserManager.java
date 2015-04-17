@@ -51,6 +51,12 @@ public interface UserManager extends GenericManager<User, Long> {
     User getUserByUsername(String username) throws UsernameNotFoundException;
 
     /**
+     * Calculates tax for a user
+     * @param user
+     */
+    void calculateTax(User user);
+
+    /**
      * Retrieves a list of all users.
      * @return List
      */
