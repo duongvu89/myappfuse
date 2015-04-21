@@ -50,7 +50,7 @@ public class MailEngineTest extends BaseManagerTestCase {
         wiser.start();
         
         Date dte = new Date();
-        this.mailMessage.setTo("foo@bar.com");
+        this.mailMessage.setTo("duongvu89@gmail.com");
         String emailSubject = "grepster testSend: " + dte;
         String emailBody = "Body of the grepster testSend message sent at: " + dte;
         this.mailMessage.setSubject(emailSubject);

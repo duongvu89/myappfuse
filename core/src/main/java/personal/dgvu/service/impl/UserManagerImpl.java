@@ -219,7 +219,6 @@ public class UserManagerImpl extends GenericManagerImpl<User, Long> implements U
         final SalaryRecord record = originRecord;
         final LocalDate startDate = new LocalDate(record.getStartDate());
         final LocalDate endDate = new LocalDate(record.getEndDate());
-
         List<TaxRate> taxRates = (List<TaxRate>) CollectionUtils.select(allTaxRates, new Predicate() {
             @Override
             public boolean evaluate(Object o) {

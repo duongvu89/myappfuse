@@ -74,26 +74,16 @@
             <artifactId>subethasmtp-wiser</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Although there is a joda transitive dependency in appfuse, it's out-dated and has runtime scope -->
+        <!-- Here we leverage transitive dependency(by commenting version), but override scope(use default scope) to use in project-->
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <version>2.7</version>
+            <scope>provided</scope>
+            <!--<version>2.7</version>-->
         </dependency>
     </dependencies>
-<profiles>
-    <profile>
-        <id>postgresql</id>
-        <activation>
-            <activeByDefault>true</activeByDefault>
-        </activation>
-    </profile>
-    <profile>
-        <id>mysql</id>
-        <activation>
-            <activeByDefault>false</activeByDefault>
-        </activation>
-    </profile>
-</profiles>
+
     <properties>
         <amp.genericCore>true</amp.genericCore>
         <amp.fullSource>false</amp.fullSource>
@@ -118,5 +108,7 @@
         <jdbc.password>duongvu89@gmail.com</jdbc.password>
         <jdbc.validationQuery><![CDATA[SELECT 1 + 1]]></jdbc.validationQuery>
 
+        <!-- Use new version by overriding property use for transitive dependency -->
+        <joda-time.version>2.7</joda-time.version>
     </properties>
 </project>
