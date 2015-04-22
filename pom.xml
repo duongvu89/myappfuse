@@ -79,9 +79,15 @@
         <dependency>
             <groupId>joda-time</groupId>
             <artifactId>joda-time</artifactId>
-            <scope>provided</scope>
+            <scope>compile</scope>
             <!--<version>2.7</version>-->
         </dependency>
+        <!-- Don't know if this version work probably -->
+        <!--<dependency>-->
+            <!--<groupId>commons-validator</groupId>-->
+            <!--<artifactId>commons-validator</artifactId>-->
+            <!--<version>1.4.1</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <properties>
