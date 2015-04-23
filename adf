@@ -1,0 +1,41 @@
+[33mcommit c9fa5efa8c72c8e9474d845d81576e80ad0a3349[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Tue Apr 7 19:05:29 2015 +0700
+
+    Change db password
+
+[33mcommit 3df7d1c1997e36d36009a725cdee46c5ebfc884e[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Mon Apr 6 23:17:18 2015 +0700
+
+    Derived property tax works
+
+[33mcommit 8389e1d76057082298b7bd3519afafca80fc5650[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Mon Apr 6 18:49:44 2015 +0700
+
+    Add derrived property "tax" (not yet finished)
+
+[33mcommit 7ea6be24232bae21a247c3d3b106572183ce700d[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Mon Apr 6 18:48:30 2015 +0700
+
+    Add derrived property "tax" (not yet finished)
+
+[33mcommit d3825ed4f411d8ce868236d89c6e8f9cb2b488f4[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Sun Apr 5 22:52:30 2015 +0700
+
+    Add Salary Record (one-to-many relationship)
+
+[33mcommit 147ea4dcf14b501f5ae4f0506aa2f31a6bf67ef8[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Sun Apr 5 22:42:18 2015 +0700
+
+    Add Salary Record (one-to-many relationship)
+
+[33mcommit 4e69e1cfb879f176c6e90e789c79709e98765a5d[m
+Author: duongvu89 <duongvu89@gmail.com>
+Date:   Sat Apr 4 13:46:44 2015 +0700
+
+    Initial commit
