@@ -88,6 +88,13 @@
             <!--<artifactId>commons-validator</artifactId>-->
             <!--<version>1.4.1</version>-->
         <!--</dependency>-->
+
+        <!-- Library support for Performance monitoring -->
+        <dependency>
+            <groupId>com.jamonapi</groupId>
+            <artifactId>jamon</artifactId>
+            <version>2.81</version>
+        </dependency>
     </dependencies>
 
     <properties>
@@ -111,7 +118,7 @@
             <![CDATA[jdbc:postgresql://localhost:5432/vudb?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true]]>
         </jdbc.url>
         <jdbc.username>postgres</jdbc.username>
-        <jdbc.password>duongvu89@gmail.com</jdbc.password>
+        <jdbc.password>postgres</jdbc.password>
         <jdbc.validationQuery><![CDATA[SELECT 1 + 1]]></jdbc.validationQuery>
 
         <!-- Use new version by overriding property use for transitive dependency -->

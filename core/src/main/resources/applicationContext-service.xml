@@ -8,6 +8,7 @@
             http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
        default-lazy-init="true">
+    <!-- no beans will be pre-instantiated with default-lazy-init enabled... -->
 
     <!-- =================================================================== -->
     <!-- AOP: Configuration and Aspects                                      -->
@@ -16,6 +17,13 @@
         <aop:advisor id="userManagerTx" advice-ref="userManagerTxAdvice" pointcut="execution(* *..service.UserManager.*(..))" order="0"/>
         <aop:advisor id="userManagerSecurity" advice-ref="userSecurityAdvice" pointcut="execution(* *..service.UserManager.saveUser(..))" order="1"/>
         <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))" order="2"/>
+        <aop:aspect id="performanceMonitor" ref="performanceMonitorAspect">
+            <aop:before method="startMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+            <aop:after method="stopMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+            <aop:after-throwing method="stopMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+            <aop:after method="log" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+            <aop:after-throwing method="log" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+        </aop:aspect>
     </aop:config>
 
     <!-- Enable @Transactional support -->
@@ -47,6 +55,7 @@
 
     <bean id="userSecurityAdvice" class="personal.dgvu.service.UserSecurityAdvice"/>
 
+    <bean id="performanceMonitorAspect" class="personal.dgvu.util.PerformanceMonitor"/>
     <!-- =================================================================== -->
     <!-- Mail: Sender and Velocity configuration                             -->
     <!-- =================================================================== -->
