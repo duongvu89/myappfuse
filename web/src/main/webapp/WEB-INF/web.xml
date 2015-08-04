@@ -34,6 +34,12 @@
         </param-value>
     </context-param>
 
+    <!-- Enabling profiles here, separate by commas -->
+    <context-param>
+        <param-name>spring.profiles.active</param-name>
+        <param-value>enableMonitoring</param-value>
+    </context-param>
+
     <filter>
         <filter-name>encodingFilter</filter-name>
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

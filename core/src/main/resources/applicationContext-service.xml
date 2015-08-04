@@ -17,13 +17,6 @@
         <aop:advisor id="userManagerTx" advice-ref="userManagerTxAdvice" pointcut="execution(* *..service.UserManager.*(..))" order="0"/>
         <aop:advisor id="userManagerSecurity" advice-ref="userSecurityAdvice" pointcut="execution(* *..service.UserManager.saveUser(..))" order="1"/>
         <aop:advisor id="managerTx" advice-ref="txAdvice" pointcut="execution(* *..service.*Manager.*(..))" order="2"/>
-        <aop:aspect id="performanceMonitor" ref="performanceMonitorAspect">
-            <aop:before method="startMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
-            <aop:after method="stopMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
-            <aop:after-throwing method="stopMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
-            <aop:after method="log" pointcut="execution(* personal.dgvu.service.*.*(..))" />
-            <aop:after-throwing method="log" pointcut="execution(* personal.dgvu.service.*.*(..))" />
-        </aop:aspect>
     </aop:config>
 
     <!-- Enable @Transactional support -->
@@ -55,7 +48,6 @@
 
     <bean id="userSecurityAdvice" class="personal.dgvu.service.UserSecurityAdvice"/>
 
-    <bean id="performanceMonitorAspect" class="personal.dgvu.util.PerformanceMonitor"/>
     <!-- =================================================================== -->
     <!-- Mail: Sender and Velocity configuration                             -->
     <!-- =================================================================== -->
@@ -104,4 +96,18 @@
     <!-- Password reset token encoder -->
     <bean id="passwordTokenEncoder" class="org.springframework.security.crypto.password.StandardPasswordEncoder"/>
 
+    <!-- Configure for Monitoring by Spring AOP as a profile -->
+    <beans profile="enableMonitoring">
+        <bean id="performanceMonitorAspect" class="personal.dgvu.util.PerformanceMonitor"/>
+        <aop:config>
+            <aop:aspect id="performanceMonitor" ref="performanceMonitorAspect">
+                <aop:before method="startMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+                <aop:after method="stopMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+                <aop:after-throwing method="stopMonitor" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+                <aop:after method="log" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+                <aop:after-throwing method="log" pointcut="execution(* personal.dgvu.service.*.*(..))" />
+            </aop:aspect>
+        </aop:config>
+    </beans>
 </beans>
+
