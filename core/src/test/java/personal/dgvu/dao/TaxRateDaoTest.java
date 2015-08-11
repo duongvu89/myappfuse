@@ -16,15 +16,10 @@ public class TaxRateDaoTest extends BaseDaoTestCase {
 
     @Test
     public void testTaxRateDao() {
-        assertEquals(dao.getAllDistinct().size(), 12);
+        assertEquals(dao.getAll().size(), 10);
 
-        dao.remove(dao.getAllDistinct().get(0));
-        assertEquals(dao.getAllDistinct().size(), 11);
+        dao.remove(dao.getAll().get(0));
+        assertEquals(dao.getAll().size(), 9);
 
-        TaxRate taxRate = dao.getAllDistinct().get(0);
-        taxRate.setYear((short) 2016);
-        dao.save(taxRate);
-        flush();
-        assertEquals(dao.getAllDistinct().size(), 12);
     }
 }
