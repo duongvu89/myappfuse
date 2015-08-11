@@ -15,8 +15,7 @@ for the same backend.
 
 To get started, complete the following steps:
 
-1. Download and install a MySQL 5.x database from
-   http://dev.mysql.com/downloads/mysql/5.0.html#downloads.
+1. Download and install a Postges 9.4 database and create database "vudb".
 
 2. From the command line, cd into the core directory and run "mvn install".
 
