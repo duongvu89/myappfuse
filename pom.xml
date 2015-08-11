@@ -110,12 +110,12 @@
 
         <hibernate.dialect>org.hibernate.dialect.PostgreSQL9Dialect</hibernate.dialect>
 
-        <jdbc.groupId>postgresql</jdbc.groupId>
+        <jdbc.groupId>org.postgresql</jdbc.groupId>
         <jdbc.artifactId>postgresql</jdbc.artifactId>
-        <jdbc.version>9.1-901.jdbc4</jdbc.version>
+        <jdbc.version>9.4-1200-jdbc41</jdbc.version>
         <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
         <jdbc.url>
-            <![CDATA[jdbc:postgresql://localhost:5432/vudb?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;autoReconnect=true]]>
+            <![CDATA[jdbc:postgresql://localhost:5432/vudb?charSet=utf8]]>
         </jdbc.url>
         <jdbc.username>postgres</jdbc.username>
         <jdbc.password>postgres</jdbc.password>
